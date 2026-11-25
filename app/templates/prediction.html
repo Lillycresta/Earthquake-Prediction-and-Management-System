@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Magnitude Classification | GeoPulse{% endblock %}
+{% block content %}
+<section class="page-header compact"><span class="eyebrow">MODEL INTERFACE</span><h1>Magnitude Classification</h1><p>Enter earthquake-related details to classify a historical magnitude pattern.</p></section>
+<section class="prediction-layout page-section">
+    <form id="prediction-form" class="prediction-form">
+        <h2>Earthquake details</h2>
+        <div class="form-grid">
+            <label>Year<input type="number" name="year" min="2016" max="2025" value="2025" required></label>
+            <label>Month<select name="month" required>{% for month in range(1,13) %}<option value="{{ month }}" {% if month == 1 %}selected{% endif %}>{{ month }}</option>{% endfor %}</select></label>
+            <label>Latitude<input type="number" name="latitude" min="-90" max="90" step="0.0001" value="28.6139" required></label>
+            <label>Longitude<input type="number" name="longitude" min="-180" max="180" step="0.0001" value="77.2090" required></label>
+            <label class="full">Depth (km)<input type="number" name="depth" min="0" step="0.1" value="10" required></label>
+        </div>
+        <button class="button primary" type="submit">Classify Magnitude</button>
+    </form>
+    <aside class="prediction-result" id="prediction-result">
+        <span class="panel-label">RESULT</span>
+        <div class="result-placeholder"><div class="result-icon">◎</div><h3>Awaiting input</h3><p>Complete the form to view a historical classification.</p></div>
+    </aside>
+</section>
+<section class="page-section"><div class="method-note"><strong>Prediction limitation:</strong> This model classifies historical USGS records using location, depth and time features. It does not forecast exact future earthquake events.</div></section>
+{% endblock %}

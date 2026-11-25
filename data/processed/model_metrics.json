@@ -1,0 +1,185 @@
+{
+  "models": {
+    "Logistic Regression": {
+      "accuracy": 0.35075,
+      "precision": 0.8924539934188696,
+      "recall": 0.35075,
+      "f1": 0.484172479409716,
+      "macro_precision": 0.33823332173604254,
+      "macro_recall": 0.35929328316871567,
+      "macro_f1": 0.20944660831713668,
+      "per_class": {
+        "Low": {
+          "precision": 0.9464544138929089,
+          "recall": 0.34815011977641735,
+          "f1": 0.5090484530064214,
+          "support": 3757
+        },
+        "Moderate": {
+          "precision": 0.06245564229950319,
+          "recall": 0.3963963963963964,
+          "f1": 0.1079092581238504,
+          "support": 222
+        },
+        "High": {
+          "precision": 0.005789909015715467,
+          "recall": 0.3333333333333333,
+          "f1": 0.011382113821138212,
+          "support": 21
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Low",
+          "Moderate",
+          "High"
+        ],
+        "matrix": [
+          [
+            1308,
+            1314,
+            1135
+          ],
+          [
+            67,
+            88,
+            67
+          ],
+          [
+            7,
+            7,
+            7
+          ]
+        ]
+      }
+    },
+    "Decision Tree": {
+      "accuracy": 0.5895,
+      "precision": 0.9121453666755353,
+      "recall": 0.5895,
+      "f1": 0.7107256341359445,
+      "macro_precision": 0.3748334588448266,
+      "macro_recall": 0.4876260153076762,
+      "macro_f1": 0.3209065776381614,
+      "per_class": {
+        "Low": {
+          "precision": 0.9620733249051833,
+          "recall": 0.6076656907106734,
+          "f1": 0.7448613376835237,
+          "support": 3757
+        },
+        "Moderate": {
+          "precision": 0.15254237288135594,
+          "recall": 0.28378378378378377,
+          "f1": 0.1984251968503937,
+          "support": 222
+        },
+        "High": {
+          "precision": 0.009884678747940691,
+          "recall": 0.5714285714285714,
+          "f1": 0.019433198380566803,
+          "support": 21
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Low",
+          "Moderate",
+          "High"
+        ],
+        "matrix": [
+          [
+            2283,
+            347,
+            1127
+          ],
+          [
+            84,
+            63,
+            75
+          ],
+          [
+            6,
+            3,
+            12
+          ]
+        ]
+      }
+    },
+    "Random Forest": {
+      "accuracy": 0.86475,
+      "precision": 0.9023652334062068,
+      "recall": 0.86475,
+      "f1": 0.8821339350304741,
+      "macro_precision": 0.38290957590548724,
+      "macro_recall": 0.4204035207495415,
+      "macro_f1": 0.3937172952431304,
+      "per_class": {
+        "Low": {
+          "precision": 0.9515677491601344,
+          "recall": 0.904711205749268,
+          "f1": 0.9275480966025379,
+          "support": 3757
+        },
+        "Moderate": {
+          "precision": 0.15064935064935064,
+          "recall": 0.26126126126126126,
+          "f1": 0.19110378912685339,
+          "support": 222
+        },
+        "High": {
+          "precision": 0.046511627906976744,
+          "recall": 0.09523809523809523,
+          "f1": 0.0625,
+          "support": 21
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Low",
+          "Moderate",
+          "High"
+        ],
+        "matrix": [
+          [
+            3399,
+            321,
+            37
+          ],
+          [
+            160,
+            58,
+            4
+          ],
+          [
+            13,
+            6,
+            2
+          ]
+        ]
+      }
+    }
+  },
+  "best_model": "Random Forest",
+  "test_size": 4000,
+  "training_size": 16000,
+  "class_distribution_full": {
+    "High": 104,
+    "Low": 18786,
+    "Moderate": 1110
+  },
+  "class_distribution_train": {
+    "High": 83,
+    "Low": 15029,
+    "Moderate": 888
+  },
+  "class_distribution_test": {
+    "High": 21,
+    "Low": 3757,
+    "Moderate": 222
+  },
+  "stratified_split": true,
+  "class_weight": "balanced",
+  "smote_applied": false,
+  "smote_reason": "Not applied: synthetic seismic coordinates and depth could distort the physical meaning of only 104 High-class records."
+}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content reveal">
+        <span class="eyebrow">DATA MINING &amp; WRANGLING PROJECT</span>
+        <h1><span>GeoPulse:</span> understanding earthquakes through <span>historical data.</span></h1>
+        <p>Explore genuine USGS earthquake records, compare machine-learning models and classify historical magnitude patterns.</p>
+        <div class="hero-actions">
+            <a class="button primary" href="/dashboard">Explore Dashboard</a>
+            <a class="button secondary" href="/analysis">View Data Analysis</a>
+        </div>
+        <div class="notice"><strong>Important:</strong> This system performs historical magnitude classification. It does not predict the exact time or location of future earthquakes.</div>
+    </div>
+    <div class="hero-visual reveal">
+        <div class="earth-ring ring-one"></div>
+        <div class="earth-ring ring-two"></div>
+        <div class="earth"><span>4.5+</span><small>magnitude scope</small></div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="section-heading">
+        <div><span class="eyebrow">DATA OVERVIEW</span><h2>Historical earthquake statistics</h2></div>
+        <span class="dataset-badge">2016–2025 • USGS</span>
+    </div>
+    <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon">◉</span><div><strong>{{ "{:,.0f}".format(stats.total) }}</strong><p>Recorded earthquakes</p></div></article>
+        <article class="stat-card"><span class="stat-icon">▲</span><div><strong>{{ stats.max_magnitude }}</strong><p>Maximum magnitude</p></div></article>
+        <article class="stat-card"><span class="stat-icon">↓</span><div><strong>{{ stats.average_depth }} km</strong><p>Average depth</p></div></article>
+        <article class="stat-card"><span class="stat-icon">▦</span><div><strong>{{ stats.start_year }}–{{ stats.end_year }}</strong><p>Dataset period</p></div></article>
+    </div>
+</section>
+
+<section class="page-section feature-section">
+    <div class="section-heading"><div><span class="eyebrow">SYSTEM FEATURES</span><h2>From raw records to insight</h2></div></div>
+    <div class="feature-grid">
+        <article><span>01</span><h3>Data processing</h3><p>Pandas cleans, validates and prepares genuine USGS earthquake records.</p></article>
+        <article><span>02</span><h3>Model comparison</h3><p>Orange supports Logistic Regression, Decision Tree and Random Forest analysis.</p></article>
+        <article><span>03</span><h3>Visual exploration</h3><p>Plotly displays maps, distributions, trends, depth patterns and performance.</p></article>
+    </div>
+</section>
+{% endblock %}

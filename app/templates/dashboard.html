@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | GeoPulse{% endblock %}
+{% block content %}
+<section class="page-header">
+    <span class="eyebrow">INTERACTIVE EXPLORATION</span>
+    <h1>Earthquake Dashboard</h1>
+    <p>Five essential views of the historical USGS earthquake dataset.</p>
+</section>
+<section class="dashboard-summary">
+    <div><span>Records</span><strong>{{ "{:,.0f}".format(stats.total) }}</strong></div>
+    <div><span>Maximum Magnitude</span><strong>{{ stats.max_magnitude }}</strong></div>
+    <div><span>Average Depth</span><strong>{{ stats.average_depth }} km</strong></div>
+</section>
+<section class="charts-grid">
+    <article class="chart-card wide"><div class="chart-heading"><div><span>01</span><h2>Geographic Earthquake Map</h2></div></div><div id="map-chart" class="plot"></div></article>
+    <article class="chart-card"><div class="chart-heading"><div><span>02</span><h2>Magnitude Distribution Histogram</h2></div></div><div id="magnitude-chart" class="plot"></div></article>
+    <article class="chart-card"><div class="chart-heading"><div><span>03</span><h2>Yearly Earthquake Trend Line Chart</h2></div></div><div id="trend-chart" class="plot"></div></article>
+    <article class="chart-card"><div class="chart-heading"><div><span>04</span><h2>Depth vs Magnitude Scatter Plot</h2></div></div><div id="depth-chart" class="plot"></div></article>
+    <article class="chart-card wide"><div class="chart-heading"><div><span>05</span><h2>Machine Learning Model Comparison</h2></div></div><div id="performance-chart" class="plot"></div></article>
+</section>
+<script>
+const chartData = {{ charts | tojson }};
+const chartConfigs = {responsive: true, displaylogo: false};
+if (chartData.map) Plotly.newPlot('map-chart', JSON.parse(chartData.map).data, JSON.parse(chartData.map).layout, chartConfigs);
+if (chartData.magnitude) Plotly.newPlot('magnitude-chart', JSON.parse(chartData.magnitude).data, JSON.parse(chartData.magnitude).layout, chartConfigs);
+if (chartData.trend) Plotly.newPlot('trend-chart', JSON.parse(chartData.trend).data, JSON.parse(chartData.trend).layout, chartConfigs);
+if (chartData.depth) Plotly.newPlot('depth-chart', JSON.parse(chartData.depth).data, JSON.parse(chartData.depth).layout, chartConfigs);
+if (chartData.performance) Plotly.newPlot('performance-chart', JSON.parse(chartData.performance).data, JSON.parse(chartData.performance).layout, chartConfigs);
+</script>
+{% endblock %}

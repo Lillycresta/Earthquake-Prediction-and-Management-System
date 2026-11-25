@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scheme version="2.0" title="Earthquake Magnitude Classification" description="USGS 2016–2025 historical magnitude classification using Logistic Regression, Decision Tree and Random Forest.">
+  <nodes>
+    <node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="USGS Processed Data" position="(80.0, 220.0)" />
+    <node id="1" name="Select Columns" qualified_name="Orange.widgets.data.owselectcolumns.OWSelectColumns" project_name="Orange3" version="" title="Select Features and Target" position="(250.0, 220.0)" />
+    <node id="2" name="Logistic Regression" qualified_name="Orange.widgets.model.owlogisticregression.OWLogisticRegression" project_name="Orange3" version="" title="Logistic Regression" position="(330.0, 80.0)" />
+    <node id="3" name="Tree" qualified_name="Orange.widgets.model.owtree.OWTreeLearner" project_name="Orange3" version="" title="Decision Tree" position="(330.0, 220.0)" />
+    <node id="4" name="Random Forest" qualified_name="Orange.widgets.model.owrandomforest.OWRandomForest" project_name="Orange3" version="" title="Random Forest" position="(330.0, 360.0)" />
+    <node id="5" name="Test and Score" qualified_name="Orange.widgets.evaluate.owtestandscore.OWTestAndScore" project_name="Orange3" version="" title="Test and Score" position="(560.0, 220.0)" />
+    <node id="6" name="Confusion Matrix" qualified_name="Orange.widgets.evaluate.owconfusionmatrix.OWConfusionMatrix" project_name="Orange3" version="" title="Confusion Matrix" position="(760.0, 160.0)" />
+    <node id="7" name="ROC Analysis" qualified_name="Orange.widgets.evaluate.owrocanalysis.OWROCAnalysis" project_name="Orange3" version="" title="ROC Analysis" position="(760.0, 280.0)" />
+  </nodes>
+  <links>
+    <link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+    <link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+    <link id="2" source_node_id="1" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+    <link id="3" source_node_id="1" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+    <link id="4" source_node_id="2" sink_node_id="5" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+    <link id="5" source_node_id="3" sink_node_id="5" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+    <link id="6" source_node_id="4" sink_node_id="5" source_channel="Learner" sink_channel="Learner" enabled="true" source_channel_id="learner" sink_channel_id="learner" />
+    <link id="7" source_node_id="1" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data" />
+    <link id="8" source_node_id="5" sink_node_id="6" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluation_results" sink_channel_id="evaluation_results" />
+    <link id="9" source_node_id="5" sink_node_id="7" source_channel="Evaluation Results" sink_channel="Evaluation Results" enabled="true" source_channel_id="evaluation_results" sink_channel_id="evaluation_results" />
+  </links>
+  <annotations>
+    <text id="0" type="text/plain" rect="(70.0, 100.0, 260.0, 70.0)" font-family="Helvetica" font-size="14">1. Load data/processed/earthquakes_processed.csv</text>
+    <text id="1" type="text/plain" rect="(430.0, 95.0, 260.0, 70.0)" font-family="Helvetica" font-size="14">2. Compare the three historical magnitude classifiers</text>
+  </annotations>
+  <thumbnail />
+  <node_properties />
+</scheme>

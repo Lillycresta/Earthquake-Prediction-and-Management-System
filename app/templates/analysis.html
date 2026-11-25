@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Data Analysis | GeoPulse{% endblock %}
+{% block content %}
+<section class="page-header compact"><span class="eyebrow">DATA UNDERSTANDING</span><h1>Data Analysis</h1><p>Cleaning, preprocessing and target-class preparation.</p></section>
+<section class="analysis-layout page-section">
+    <article class="info-panel">
+        <span class="panel-label">SOURCE</span><h2>USGS Earthquake Catalog</h2>
+        <p>Historical global records for 2016–2025 with magnitude 4.5 or greater.</p>
+        <div class="info-list">
+            <div><span>Cleaned records</span><strong>{{ "{:,.0f}".format(cleaned) }}</strong></div>
+            <div><span>Primary fields</span><strong>{{ columns|join(', ') }}</strong></div>
+            <div><span>Classification</span><strong>Low / Moderate / High</strong></div>
+        </div>
+    </article>
+    <article class="process-panel">
+        <span class="panel-label">PREPROCESSING</span>
+        <ol class="process-list">
+            <li><span>1</span><div><strong>Validate fields</strong><p>Dates, coordinates, depth and magnitude are converted and checked.</p></div></li>
+            <li><span>2</span><div><strong>Remove invalid records</strong><p>Missing values, invalid coordinates and duplicate events are excluded.</p></div></li>
+            <li><span>3</span><div><strong>Create features</strong><p>Year, month, latitude, longitude and depth are retained for classification.</p></div></li>
+            <li><span>4</span><div><strong>Create target</strong><p>Low: &lt;5.5 • Moderate: 5.5–6.49 • High: ≥6.5</p></div></li>
+        </ol>
+    </article>
+</section>
+<section class="page-section">
+    <div class="section-heading"><div><span class="eyebrow">RESULT SUMMARY</span><h2>Class distribution</h2></div></div>
+    <div class="class-grid">
+        {% for name, count in class_counts.items() %}
+        <article><span>{{ name }}</span><strong>{{ "{:,.0f}".format(count) }}</strong><p>historical events</p></article>
+        {% else %}
+        <article><span>Data not prepared</span><strong>—</strong><p>Run preprocess_train.py</p></article>
+        {% endfor %}
+    </div>
+    <div class="method-note"><strong>Methodology note:</strong> This is supervised classification of historical earthquake records. Current magnitude is used only to define the target class; it is not used as a prediction input.</div>
+</section>
+<section class="page-section">
+<div class="section-heading" style="margin-top:40px"><div><span class="eyebrow">MODEL EVALUATION</span><h2>Balanced model comparison</h2></div></div>
+    {% if metrics and metrics.models %}
+    <div class="class-grid">
+        {% for name, values in metrics.models.items() %}
+        <article><span>{{ name }}</span><strong>{{ '%.2f'|format(values.macro_f1 * 100) }}%</strong><p>macro F1 • accuracy {{ '%.2f'|format(values.accuracy * 100) }}%</p></article>
+        {% endfor %}
+    </div>
+    <div class="info-panel" style="margin-top:18px">
+        <span class="panel-label">PER-CLASS RESULTS: {{ metrics.best_model }}</span>
+        <div class="info-list">
+            {% for label in ['Low', 'Moderate', 'High'] %}
+            {% set report = metrics.models[metrics.best_model].per_class[label] %}
+            <div><span>{{ label }} • support {{ report.support }}</span><strong>Precision {{ '%.1f'|format(report.precision * 100) }}% • Recall {{ '%.1f'|format(report.recall * 100) }}% • F1 {{ '%.1f'|format(report.f1 * 100) }}%</strong></div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if metrics.smote_applied is defined %}
+    <div class="method-note"><strong>SMOTE:</strong> {{ 'Applied to training data only.' if metrics.smote_applied else metrics.smote_reason }}</div>
+    {% endif %}
+    {% else %}
+    <div class="method-note">Run <strong>preprocess_train.py</strong> to generate real model evaluation metrics.</div>
+    {% endif %}
+</section>
+{% endblock %}
